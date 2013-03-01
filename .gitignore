@@ -33,3 +33,13 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+*.swp
+.Python
+local_settings.py
+
+lib
+src
+bin
+include
+share
