@@ -19,9 +19,10 @@ class Command(NoArgsCommand):
                 users = site.registered_users.all()
 
                 message = "The site %s has changes. Check them out at %s!!" % (site.name, site.url)
-                user_phones = [user.phone_number for user in users]
+                user_phones = [str(user.phone_number) for user in users]
+                print user_phones
                 print "Sending messages to %s users" % len(user_phones)
-                api.send_sms(body=message, from_phone=settings.DEFAULT_PHONE, to_phone=user_phones)
+                api.send_sms(body=message, from_phone=settings.DEFAULT_PHONE, to=user_phones)
 
 
 

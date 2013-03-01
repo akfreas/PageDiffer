@@ -69,9 +69,9 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 't()$!pl5*g-$53r$5mc3zya)xihdelf2js212dzudq(s6a$$*v'
 
-TWILIO_ACCOUNT_SID = "AC404e0f16d19cda5331278d6690702864"
-TWILIO_AUTH_TOKEN = "974d4078e73d287a0436fc273fa260c2"
-SMS_BACKEND = "sms.backends.twiliorest.SmsBackend"
+SENDSMS_TWILIO_ACCOUNT_SID = "AC404e0f16d19cda5331278d6690702864"
+SENDSMS_TWILIO_AUTH_TOKEN = "974d4078e73d287a0436fc273fa260c2"
+SENDSMS_BACKEND = "sendsms.backends.twiliorest.SmsBackend"
 DEFAULT_PHONE = "202-304-1190"
 
 DEFAULT_DIFF_STORAGE = "/var/tmp"
