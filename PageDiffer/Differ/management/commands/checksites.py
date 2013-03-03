@@ -12,8 +12,12 @@ class Command(NoArgsCommand):
 
         sites = DiffedSite.objects.all()
 
+        print "Checking for changes in %i sites..." % len(sites)
+
         for site in sites:
             is_different = differs.diff_site(site.url, site.name)
+
+            print "Checking for changes on %s (%s)..." % (site.name, site.url)
 
             if is_different == True:
                 users = site.registered_users.all()
@@ -21,7 +25,7 @@ class Command(NoArgsCommand):
                 message = "The site %s has changes. Check them out at %s!!" % (site.name, site.url)
                 user_phones = [str(user.phone_number) for user in users]
                 print user_phones
-                print "Sending messages to %s users" % len(user_phones)
+                print "The site has changed. Sending messages to %s users" % len(user_phones)
                 api.send_sms(body=message, from_phone=settings.DEFAULT_PHONE, to=user_phones)
 
 
