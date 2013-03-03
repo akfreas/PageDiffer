@@ -21,7 +21,7 @@ def diff_site(url, name):
     
     return_value = False
     
-    for line in lines:
+    for line in lines[:10]:
         if content_hash != line:
             return_value = True
         
