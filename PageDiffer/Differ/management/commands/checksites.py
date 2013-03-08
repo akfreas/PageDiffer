@@ -22,7 +22,7 @@ class Command(NoArgsCommand):
             if is_different == True:
                 users = site.registered_users.all()
 
-                message = "The site %s has changes. Check them out at %s!!" % (site.name, site.url)
+                message = site.message
                 user_phones = [str(user.phone_number) for user in users]
                 print user_phones
                 print "The site has changed. Sending messages to %s users" % len(user_phones)
