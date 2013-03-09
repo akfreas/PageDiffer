@@ -13,6 +13,7 @@ django-sendsms==0.2.2
 gunicorn==0.17.2
 httplib2==0.7.7
 kombu==2.5.6
+phonenumbers==5.3b1
 psycopg2==2.4.6
 python-dateutil==1.5
 requests==1.1.0
