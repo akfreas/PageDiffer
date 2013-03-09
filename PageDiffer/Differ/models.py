@@ -7,6 +7,7 @@ class RegisteredPerson(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.BigIntegerField()
+    confirmed = models.BooleanField()
     paid = models.BooleanField()
 
 class DiffedSite(models.Model):
