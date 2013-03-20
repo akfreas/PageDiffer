@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>WWDC 2013 Alerts</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="/static/js/jquery-1.8.1.min.js"></script>
+        <script src="/static/js/init.js"></script>
+        <script src="/static/js/jquery.placeholder-enhanced.js"></script>
+        <script src="/static/js/jquery.dropotron-1.1.js"></script>
+                <script type="text/javascript">
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+
+            $(document).ready(function() {
+
+                    var csrftoken = getCookie('csrftoken');
+
+                    $.ajaxSetup({
+                        crossDomain: false, // obviates need for sameOrigin test
+                        beforeSend: function(xhr, settings) {
+                            if (!csrfSafeMethod(settings.type)) {
+                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                            }
+                        }
+                    });
+
+                    $("#submit-info").click(function() {
+
+                        $.each($(".placeholderError"), function(key, elm) {
+                            $(elm).removeClass("placeholderError");
+                        });
+
+
+                        var infoDict = {"phone_number" : $("#id_phone_number").val(),
+                                        "name" : $("#id_name").val(),
+                                        };
+
+                        $.ajax({
+                            url: "/send-info",
+                            type: "POST",
+                            data: infoDict,
+                            success: function(data) { 
+
+                            var dataDict = $.parseJSON(data);
+                            var successful = dataDict['success'];
+
+                                if (dataDict['success'] == false) {
+                                    errors = dataDict['errors'];
+                                    console.log(errors);
+                                    $('.error').remove();
+                                    $.each(errors, function(key, elm) {
+                                        var domelm = $('#id_' + key);
+                                        domelm.addClass("placeholderError");
+                                        $('<p class="error" style="font-size: .8em"><br>(' + elm + ')</p>').prependTo(domelm);
+                                        });
+                                    } 
+                            }
+                        });
+                    });
+                });
+                        
+        </script>
+        <style type="text/css">
+            .placeholderError::-webkit-input-placeholder {
+                color: red;
+            }
+            .placeholderError {
+                border-color: red;
+                border-width: 1px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+            {% csrf_token %}
+            <input id="id_phone_number" type="text" name="phone_number" placeholder="Phone number"><p>
+            <input id="id_name" type="text" name="name" placeholder="Name"><p>
+            <input type="submit" name="submit" id="submit-info">
+    </body>
+</html>

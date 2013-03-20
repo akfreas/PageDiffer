@@ -19,5 +19,6 @@ urlpatterns = patterns('Differ.views',
      url(r'^$', 'index'),
      url(r'^incoming_sms', 'incoming_sms'),
      url(r'^send-info', 'capture_info'),
+     url(r'^admin/', include(admin.site.urls)),
 )
 

@@ -2,7 +2,7 @@ import os
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 
-# Django settings for PageDiffer project.
+# Django settings for PageNotifier project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -97,8 +97,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Differ.urls'
-
+ROOT_URLCONF = 'Notifier.urls'
 
 STATIC_ROOT = PROJECT_PATH + "/static"
 
@@ -113,7 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Differ',
+    'south',
+    'Notifier',
     # Uncomment the next line to enable the admin:
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
