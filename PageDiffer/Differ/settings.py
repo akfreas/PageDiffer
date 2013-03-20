@@ -96,7 +96,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Differ.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'Differ.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -145,6 +145,17 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'pagediffer',                      # Or path to database file if using sqlite3.
+        'USER': 'akfreas',                      # Not used with sqlite3.
+        'PASSWORD': 'kasashi',                  # Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 

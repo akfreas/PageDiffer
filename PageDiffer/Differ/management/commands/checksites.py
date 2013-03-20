@@ -10,7 +10,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        sites = DiffedSite.objects.all()
+        sites = DiffedSite.objects.filter(difference_found=False)
 
         print "Checking for changes in %i sites..." % len(sites)
 
