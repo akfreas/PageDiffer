@@ -18,11 +18,18 @@ class SiteMembership(models.Model):
 
 class SiteHash(models.Model):
 
+    def __unicode__(self):
+        return "%s for %s" % (self.md5hash, self.site.name)
+
     site = models.ForeignKey("DiffedSite")
     md5hash = models.CharField(max_length=100)
     date = models.DateTimeField()
+    page_content = models.TextField()
 
 class DiffedSite(models.Model):
+
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.url)
 
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)

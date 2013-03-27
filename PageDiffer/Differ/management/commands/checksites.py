@@ -15,7 +15,7 @@ class Command(NoArgsCommand):
         print "Checking for changes in %i sites..." % len(sites)
 
         for site in sites:
-            is_different = differs.diff_site(site.url, site.name)
+            is_different = differs.diff_site(site)
 
             print "Checking for changes on %s (%s)..." % (site.name, site.url)
 

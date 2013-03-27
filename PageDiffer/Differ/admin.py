@@ -18,3 +18,10 @@ class DiffedSiteAdmin(admin.ModelAdmin):
 
 admin.site.register(DiffedSite, DiffedSiteAdmin)
 
+
+class SiteHashAdmin(admin.ModelAdmin):
+
+    list_display = ("site", "md5hash", "date")
+    list_filter = ("site__name",)
+
+admin.site.register(SiteHash, SiteHashAdmin)

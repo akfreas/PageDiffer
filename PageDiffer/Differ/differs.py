@@ -4,8 +4,39 @@ from md5 import md5
 import json
 from argparse import ArgumentParser
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
 
-def diff_site(url, name):
+from Differ.models import *
+
+
+def diff_site(site):
+
+
+    page_request = requests.get(site.url)
+    content_hash = md5(page_request.content).hexdigest()
+
+    return_value = False
+
+    try:
+        last_hash = SiteHash.objects.filter(site=site).latest("date")
+
+        if last_hash.md5hash != content_hash:
+
+            return_value = True
+            new_hash = SiteHash(site=site, md5hash=content_hash, date=datetime.now(), page_content=page_request.content)
+            new_hash.save()
+
+    except ObjectDoesNotExist:
+
+        first_hash = SiteHash(site=site, md5hash=content_hash, date=datetime.now(), page_content=page_request.content)
+        first_hash.save()
+        return_value = False
+
+    return return_value
+
+
+def diff_site_with_file(url, name):
 
     filename = "%s/%s" % (settings.DEFAULT_DIFF_STORAGE, name)
 
