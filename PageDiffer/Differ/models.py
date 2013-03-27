@@ -16,6 +16,11 @@ class SiteMembership(models.Model):
     paid = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     notified = models.BooleanField()
 
+class SiteHash(models.Model):
+
+    site = models.ForeignKey("DiffedSite")
+    md5hash = models.CharField(max_length=100)
+    date = models.DateTimeField()
 
 class DiffedSite(models.Model):
 
